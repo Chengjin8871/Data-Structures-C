@@ -13,6 +13,10 @@ setlocal
 
 cd /d "%~dp0"
 
+REM 保证 ssh 能读到 ~/.ssh/config（计划任务环境下 HOME 可能为空）
+if not defined HOME set "HOME=%USERPROFILE%"
+set "GIT_TERMINAL_PROMPT=0"
+
 set "LOGFILE=%~dp0.git\sync-log.txt"
 if not exist "%~dp0.git\" mkdir "%~dp0.git" 2>nul
 
