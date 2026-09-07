@@ -20,10 +20,9 @@ echo ============================================================>> "%LOGFILE%"
 echo [%date% %time%] === sync start ===>> "%LOGFILE%"
 
 REM ---------- build an ASCII timestamp for the commit message ----------
-for /f "tokens=1-3 delims=/-. " %%a in ("%date%") do set "DY=%%a-%%b-%%c"
-set "TM=%time: =0%"
-set "TM=%TM:~0,8%"
-set "STAMP=%DY% %TM%"
+set "STAMP="
+for /f "usebackq delims=" %%i in (`powershell -NoProfile -NonInteractive -Command "Get-Date -Format yyyy-MM-dd_HH-mm-ss" 2^>nul`) do set "STAMP=%%i"
+if not defined STAMP set "STAMP=%date% %time%"
 
 echo [1/4] git add -A ...
 git add -A>> "%LOGFILE%" 2>&1
@@ -50,8 +49,16 @@ if errorlevel 1 (
 
 echo [4/4] git push ...
 git push origin main>> "%LOGFILE%" 2>&1
+if not errorlevel 1 goto :ok
+
+REM ---------- network hiccup? wait 10s and retry once ----------
+echo Push failed, retrying in 10s ...
+echo [%STAMP%] first push failed, retrying>> "%LOGFILE%"
+ping -n 11 127.0.0.1 >nul 2>&1
+git push origin main>> "%LOGFILE%" 2>&1
 if errorlevel 1 goto :fail
 
+:ok
 echo.
 echo [OK] Pushed to GitHub successfully.  %STAMP%
 echo [%STAMP%] SUCCESS>> "%LOGFILE%"
