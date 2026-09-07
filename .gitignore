@@ -1,0 +1,38 @@
+# C / C++ 编译产物
+*.o
+*.obj
+*.exe
+*.out
+*.app
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.pdb
+*.ilk
+*.idb
+*.gch
+
+# 构建目录
+build/
+dist/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+
+# 编辑器 / IDE
+.vs/
+.vscode/
+.idea/
+*.swp
+*~
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 同步脚本日志
+sync-log.txt

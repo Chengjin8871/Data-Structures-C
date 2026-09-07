@@ -1,0 +1,15 @@
+# 统一换行符：提交时转成 LF，检出时按系统转换
+* text=auto
+
+*.c    text diff=c
+*.h    text diff=c
+*.md   text diff=markdown
+*.txt  text
+*.bat  text eol=crlf
+*.sh   text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
