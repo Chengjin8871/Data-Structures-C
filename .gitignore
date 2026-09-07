@@ -14,6 +14,10 @@
 *.idb
 *.gch
 
+# 无扩展名的 gcc 编译产物（如 interactive / a.out）
+interactive
+a.out
+
 # 构建目录
 build/
 dist/
@@ -33,6 +37,10 @@ Makefile
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# 临时 / 冒烟测试文件
+_smoke.txt
+_sync_test.txt
 
 # 同步脚本日志
 sync-log.txt
