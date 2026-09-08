@@ -15,7 +15,9 @@ bool Del_s_t(SeqList &L, ElemType s, ElemType t) {
 
     for (i = 0; i < L.length; i++) {
         if (L.data[i] < s || L.data[i] > t) {
-            L.data[k++] = L.data[i];
+            k++;
+            L.data[k] = L.data[i];
+            
         }
     }
 
