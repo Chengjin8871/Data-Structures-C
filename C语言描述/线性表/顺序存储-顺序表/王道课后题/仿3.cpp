@@ -1,18 +1,20 @@
 #include <stdio.h>
 #define MaxSize 100
+
 typedef int ElemType;
+
 typedef struct {
     ElemType data[MaxSize];
     int length;
 } SeqList;
+
 void ListDelete(SeqList &L, ElemType x) {
-    int k = 0, i;   
-    while( i <L.length)
-{
-        if(L.data[i] != x) {
+    int k = 0, i = 0;
+    while (i < L.length) {
+        if (L.data[i] != x) {
             L.data[k++] = L.data[i];
-        
-        }i++;
+        }
+        i++;
     }
     L.length = k;
 }
