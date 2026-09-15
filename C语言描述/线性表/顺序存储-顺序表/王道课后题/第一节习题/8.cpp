@@ -1,57 +1,41 @@
-#include <stdio.h>
-#define MAXSIZE 100
-
+r  #include <stdio.h>
 typedef int ElemType;
-typedef struct {
-    ElemType data[MAXSIZE];
-    int length;
-} SeqList;
 
-bool SearchExchangeInsert(SeqList &L, ElemType e) {
-    int i = 0;
+bool SearchExchange(ElemType a[], int n, ElemType x) {
+    int low = 0, high = n - 1;
 
-    while (i < L.length && L.data[i] < e) {
-        i++;
-    }
-
-    if (i < L.length && L.data[i] == e) {
-        if (i + 1 < L.length) {
-            ElemType tmp = L.data[i];
-            L.data[i] = L.data[i + 1];
-            L.data[i + 1] = tmp;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (a[mid] == x) {
+            if (mid != n - 1) {
+                ElemType temp = a[mid];
+                a[mid] = a[mid + 1];
+                a[mid + 1] = temp;
+            }
+            return true;
+        } else if (a[mid] < x) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
         }
-        return true;
     }
-
-    if (L.length >= MAXSIZE) {
-        return false;
+i
+    for (int i = n - 1; i >= low; --i) {
+        a[i + 1] = a[i];
     }
-
-    for (int j = L.length; j > i; j--) {
-        L.data[j] = L.data[j - 1];
-    }
-
-    L.data[i] = e;
-    L.length++;
+    a[low] = x;
     return true;
 }
 
 int main(void) {
-    SeqList L;
-    L.length = 5;
-    for (int i = 0; i < L.length; i++) {
-        L.data[i] = i + 1;
+    int a[11] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0};
+    int n = 10;
+    int x = 11;
+
+    SearchExchange(a, n, x);
+
+    for (int i = 0; i < n + 1; i++) {
+        printf("%d ", a[i]);
     }
-
-    ElemType e = 3;
-    SearchExchangeInsert(L, e);
-
-    printf("顺序表为：");
-    for (int i = 0; i < L.length; i++) {
-        printf("%d ", L.data[i]);
-    }
-    printf("\n");
-
     return 0;
 }
-
