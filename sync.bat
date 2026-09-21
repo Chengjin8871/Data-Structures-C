@@ -34,8 +34,7 @@ echo [%date% %time%] repo=%REPO%>> "%LOGFILE%"
 
 REM ---------- build an ASCII timestamp for the commit message ----------
 set "STAMP="
-for /f "usebackq delims=" %%i in (`powershell -NoProfile -NonInteractive -Command "Get-Date -Format yyyy-MM-dd_HH-mm-ss" 2^>nul`) do set "STAMP=%%i"
-if not defined STAMP set "STAMP=%date% %time%"
+set "STAMP=%date% %time%"
 
 echo [1/4] git add -A ...
 git -C "%REPO%" add -A>> "%LOGFILE%" 2>&1
